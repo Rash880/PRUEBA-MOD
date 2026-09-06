@@ -11,6 +11,6 @@ public class MiMod implements ModInitializer {
     @Override
     public void onInitialize() {
         LOGGER.info("¡Inicializando {} para Minecraft 26.2!", MOD_ID);
-        ModItems.registerModItems();
+        ModItems.initialize();
     }
 }

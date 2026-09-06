@@ -3,9 +3,9 @@
   "id": "mimod",
   "version": "${version}",
   "name": "Mi Mod",
-  "description": "Mod de prueba para Minecraft 26.2 con Fabric",
+  "description": "Mod para Minecraft 26.2 con Fabric Loader",
   "authors": [
-    "Carlos Alberto"
+    "Rash880"
   ],
   "contact": {},
   "license": "MIT",

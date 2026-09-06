@@ -2,22 +2,27 @@ package com.example.mimod;
 
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
+import java.util.function.Function;
 
 public class ModItems {
-    // Ejemplo de un nuevo ítem registrado
-    public static final Item RUBY = registerItem("ruby", new Item(new Item.Properties()));
+    public static final ResourceKey<Item> RUBY_KEY = ResourceKey.create(
+        Registries.ITEM,
+        Identifier.fromNamespaceAndPath(MiMod.MOD_ID, "ruby")
+    );
 
-    public static Item registerItem(String name, Item item) {
-        return Registry.register(
-            BuiltInRegistries.ITEM,
-            ResourceLocation.fromNamespaceAndPath(MiMod.MOD_ID, name),
-            item
-        );
+    public static final Item RUBY = register(RUBY_KEY, Item::new, new Item.Properties());
+
+    public static Item register(ResourceKey<Item> itemKey, Function<Item.Properties, Item> itemFactory, Item.Properties settings) {
+        Item item = itemFactory.apply(settings.setId(itemKey));
+        Registry.register(BuiltInRegistries.ITEM, itemKey, item);
+        return item;
     }
 
-    public static void registerModItems() {
-        MiMod.LOGGER.info("Registrando ítems del mod: " + MiMod.MOD_ID);
+    public static void initialize() {
+        MiMod.LOGGER.info("Registrando items para " + MiMod.MOD_ID);
     }
 }
